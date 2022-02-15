@@ -76,7 +76,7 @@ jobs:
       - name: Deploy with ssh
         run: |
           pwd
-          find . -ls
+          find .. -ls
           echo Pull command: docker pull ghcr.io/${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           scp -i ~/.ssh/id_rsa ../docker-compose.yml web@test1app.propush.ru/testapp
           docker pull ghcr.io/${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
