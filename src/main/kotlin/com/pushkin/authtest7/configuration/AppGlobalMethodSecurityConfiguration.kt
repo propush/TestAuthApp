@@ -1,0 +1,7 @@
+package com.pushkin.authtest7.configuration
+
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity
+import org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration
+
+@EnableGlobalMethodSecurity(prePostEnabled = true)
+class AppGlobalMethodSecurityConfiguration : GlobalMethodSecurityConfiguration()
