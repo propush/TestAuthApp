@@ -60,6 +60,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+      - uses: actions/checkout@v2
+
       - name: Create SSH key
         run: |
           install -m 600 -D /dev/null ~/.ssh/id_rsa
@@ -74,7 +77,6 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Deploy with ssh
-      - uses: actions/checkout@v2
         run: |
           pwd
           find . -ls
