@@ -67,9 +67,12 @@ jobs:
         run: |
           scp -i ~/.ssh/id_rsa docker-compose.yml web@testapp1.propush.ru:testapp
           ssh -i ~/.ssh/id_rsa web@testapp1.propush.ru <<'ENDSSH'
+            cd testapp
+            export IMAGE=${{ steps.meta.outputs.tags }}
             echo ${{ secrets.GITHUB_TOKEN }} | docker login ${{ env.REGISTRY }} -u ${{ github.actor }} --password-stdin
-            echo Pull command: docker pull ${{ steps.meta.outputs.tags }}
-            docker pull ${{ steps.meta.outputs.tags }}
+            echo Pull command: docker pull $IMAGE
+            docker pull $IMAGE
             docker images
+            docker-compose up -d
           ENDSSH
 
