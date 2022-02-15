@@ -16,7 +16,7 @@ env:
   IMAGE_NAME: ${{ github.repository }}
 
 jobs:
-  build-and-push-image:
+  build-and-push-image-deploy:
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -57,12 +57,6 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
       - name: Create SSH key
         run: |
           install -m 600 -D /dev/null ~/.ssh/id_rsa
@@ -71,11 +65,9 @@ jobs:
 
       - name: Deploy with ssh
         run: |
-          pwd
-          find . -ls
           echo Pull command: docker pull ghcr.io/${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           scp -i ~/.ssh/id_rsa docker-compose.yml web@testapp1.propush.ru:testapp
-          ssh -i ~/.ssh/id_rsa web@test1app.propush.ru <<'ENDSSH'
+          ssh -i ~/.ssh/id_rsa web@testapp1.propush.ru <<'ENDSSH'
             echo Token: ${{ secrets.GITHUB_TOKEN }}
             # echo ${{ secrets.GITHUB_TOKEN }} | docker login ${{ env.REGISTRY }} -u ${{ github.actor }} --password-stdin
             # docker pull ghcr.io/${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
