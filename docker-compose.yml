@@ -1,5 +1,8 @@
-version: '3.8'
+version: '3'
 services:
-  app:
+  testapp:
     image: ${IMAGE}
+    container_name: testapp
+    ports:
+      - "8080:80"
     restart: always

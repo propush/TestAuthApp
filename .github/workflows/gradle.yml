@@ -72,6 +72,7 @@ jobs:
             echo ${{ secrets.GITHUB_TOKEN }} | docker login ${{ env.REGISTRY }} -u ${{ github.actor }} --password-stdin
             echo Pull command: docker pull $IMAGE
             docker pull $IMAGE
+            docker images prune -f
             docker images
             docker-compose up -d
           ENDSSH
