@@ -65,11 +65,11 @@ jobs:
 
       - name: Deploy with ssh
         run: |
-          echo Pull command: docker pull ghcr.io/${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           scp -i ~/.ssh/id_rsa docker-compose.yml web@testapp1.propush.ru:testapp
           ssh -i ~/.ssh/id_rsa web@testapp1.propush.ru <<'ENDSSH'
             echo Token: ${{ secrets.GITHUB_TOKEN }}
-            # echo ${{ secrets.GITHUB_TOKEN }} | docker login ${{ env.REGISTRY }} -u ${{ github.actor }} --password-stdin
-            # docker pull ghcr.io/${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+            echo Pull command: docker pull ghcr.io/${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+            echo ${{ secrets.GITHUB_TOKEN }} | docker login ${{ env.REGISTRY }} -u ${{ github.actor }} --password-stdin
+            docker pull ghcr.io/${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           ENDSSH
 
