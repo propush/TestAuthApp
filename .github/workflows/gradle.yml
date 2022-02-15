@@ -74,7 +74,7 @@ jobs:
           pwd
           find . -ls
           echo Pull command: docker pull ghcr.io/${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-          scp -i ~/.ssh/id_rsa docker-compose.yml web@test1app.propush.ru:testapp
+          scp -i ~/.ssh/id_rsa docker-compose.yml web@testapp1.propush.ru:testapp
           ssh -i ~/.ssh/id_rsa web@test1app.propush.ru <<'ENDSSH'
             echo Token: ${{ secrets.GITHUB_TOKEN }}
             # echo ${{ secrets.GITHUB_TOKEN }} | docker login ${{ env.REGISTRY }} -u ${{ github.actor }} --password-stdin
