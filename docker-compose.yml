@@ -4,5 +4,5 @@ services:
     image: ${IMAGE}
     container_name: testapp
     ports:
-      - "8080:80"
+      - "80:8080"
     restart: always
